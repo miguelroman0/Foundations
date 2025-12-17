@@ -11,6 +11,7 @@ body {
   color: #0a0a0a;
   background: #ffffff;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a {
@@ -32,7 +33,7 @@ a {
   gap: 2rem;
   z-index: 10;
   color: #0a0a0a;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .nav a {
@@ -50,7 +51,7 @@ a {
   display: flex;
   align-items: center;
   gap: 1.75rem;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   row-gap: 0.35rem;
   font-weight: 500;
   justify-content: flex-end;
@@ -102,7 +103,7 @@ a {
   .nav-links {
     gap: 1.1rem;
     font-size: 0.95rem;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex: 1;
   }
 }
