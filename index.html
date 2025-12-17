@@ -10,13 +10,15 @@
 <body>
   <!-- NAV -->
   <header class="nav">
-    <a href="#home" class="logo">Miguel Romano</a>
-    <nav>
+    <div class="brand">
+      <a href="#home" class="logo">Miguel Romano</a>
+      <a href="Miguel_Romano_Resume.pdf" class="resume-link" target="_blank" rel="noopener">Resume</a>
+    </div>
+    <nav class="nav-links">
       <a href="#about">About</a>
       <a href="#stack">Stack</a>
       <a href="#projects">Builds</a>
       <a href="#contact">Contact</a>
-      <a href="Miguel_Romano_Resume.pdf" class="resume-link" target="_blank" rel="noopener">Resume</a>
     </nav>
   </header>
 
@@ -92,6 +94,28 @@
           View on GitHub →
         </a>
       </div>
+      <div class="project-card">
+        <h3>saasproductized.com</h3>
+        <p>
+          A productized service site designed and built with clean, conversion-
+          friendly UI patterns. I led the visual direction and front-end build
+          to keep the value prop crisp.
+        </p>
+        <a href="https://saasproductized.com" target="_blank" rel="noopener">
+          Visit saasproductized.com →
+        </a>
+      </div>
+      <div class="project-card">
+        <h3>maybenot.com</h3>
+        <p>
+          A playful landing page showcasing minimalist visuals and responsive
+          interactions. I owned the design language and front-end polish to make
+          the experience feel light and intentional.
+        </p>
+        <a href="https://maybenot.com" target="_blank" rel="noopener">
+          Visit maybenot.com →
+        </a>
+      </div>
     </div>
   </section>
 
@@ -110,5 +134,42 @@
   <footer class="footer">
     © 2025 Miguel Romano • 2026
   </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = Array.from(navLinks)
+      .map((link) => document.querySelector(link.getAttribute('href')))
+      .filter(Boolean);
+
+    const removeActiveStates = () => navLinks.forEach((link) => link.classList.remove('active'));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+            if (activeLink) {
+              removeActiveStates();
+              activeLink.classList.add('active');
+            }
+          }
+        });
+      },
+      {
+        rootMargin: '-45% 0px -40% 0px',
+        threshold: [0.25, 0.5, 0.75],
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        removeActiveStates();
+        link.classList.add('active');
+      });
+    });
+  </script>
 </body>
 </html>
