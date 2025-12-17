@@ -16,6 +16,7 @@
     </div>
     <nav class="nav-links">
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
       <a href="#stack">Stack</a>
       <a href="#projects">Builds</a>
       <a href="#contact">Contact</a>
@@ -57,6 +58,58 @@
           <h3>Education</h3>
           <p>A.A.S. Software Development — CCC Harold Washington</p>
           <p>Expected December 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="section alt">
+    <h2>Experience</h2>
+    <div class="experience-grid">
+      <div class="experience-card">
+        <div class="experience-title">
+          <h3>Roles that sharpened my engineering practice</h3>
+        </div>
+        <div class="experience-item">
+          <div>
+            <p class="experience-role">Founder &amp; Full-Stack Engineer</p>
+            <p class="experience-place">SaaSProductized.com</p>
+          </div>
+          <p class="experience-dates">2022 — Present</p>
+          <p class="experience-detail">
+            Building high-performance, agile SaaS systems that productize POS, ordering, account, and data flows for small businesses—leveraging GPTs, Codex, and Web3 to deliver modern solutions at affordable rates.
+          </p>
+        </div>
+        <div class="experience-item">
+          <div>
+            <p class="experience-role">AI Trainer &amp; Evaluator</p>
+            <p class="experience-place">Outlier AI &amp; Handshake (freelance)</p>
+          </div>
+          <p class="experience-dates">2024 — Present</p>
+          <p class="experience-detail">
+            Guide and critique GenAI model outputs across safety, reasoning, and UX quality, shaping better assistants through prompt engineering and data labeling on enterprise training platforms.
+          </p>
+        </div>
+        <div class="experience-item">
+          <div>
+            <p class="experience-role">Software Development Engineer (freelance)</p>
+            <p class="experience-place">Independent</p>
+          </div>
+          <p class="experience-dates">2019 — Present</p>
+          <p class="experience-detail">
+            Partnered with startups and service brands to build responsive web experiences, integrating analytics, automation, and GenAI-assisted features that supported fast iterations.
+          </p>
+        </div>
+        <div class="experience-item">
+          <div>
+            <p class="experience-role">Technology Specialist</p>
+            <p class="experience-place">Harold Washington College IT Lab</p>
+          </div>
+          <p class="experience-dates">2024 — 2025</p>
+          <p class="experience-detail">
+            Supported students with development tooling, deployed lab systems, and documented best practices for peer teams.
+          </p>
         </div>
       </div>
     </div>
@@ -143,26 +196,24 @@
 
     const removeActiveStates = () => navLinks.forEach((link) => link.classList.remove('active'));
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('id');
-            const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-            if (activeLink) {
-              removeActiveStates();
-              activeLink.classList.add('active');
-            }
-          }
-        });
-      },
-      {
-        rootMargin: '-45% 0px -40% 0px',
-        threshold: [0.25, 0.5, 0.75],
-      }
-    );
+    const setActiveLink = () => {
+      const offset = window.innerHeight * 0.25;
+      let currentId = sections[0]?.id;
 
-    sections.forEach((section) => observer.observe(section));
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top - offset <= 0) {
+          currentId = section.id;
+        }
+      });
+
+      if (!currentId) return;
+      const activeLink = document.querySelector(`.nav-links a[href="#${currentId}"]`);
+      if (activeLink) {
+        removeActiveStates();
+        activeLink.classList.add('active');
+      }
+    };
 
     navLinks.forEach((link) => {
       link.addEventListener('click', () => {
@@ -170,6 +221,11 @@
         link.classList.add('active');
       });
     });
+
+    window.addEventListener('scroll', setActiveLink);
+    window.addEventListener('resize', setActiveLink);
+    window.addEventListener('load', setActiveLink);
+    setActiveLink();
   </script>
 </body>
 </html>
