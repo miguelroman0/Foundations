@@ -28,10 +28,19 @@ a {
   position: sticky;
   top: 0;
   background: #fff;
+  gap: 2rem;
 }
 
-.nav nav a {
-  margin-left: 1.5rem;
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
   font-weight: 500;
 }
 
@@ -41,11 +50,32 @@ a {
   border-radius: 20px;
   font-weight: 700;
   transition: background 0.2s ease, color 0.2s ease;
+  width: fit-content;
 }
 
 .resume-link:hover {
   background: #111;
   color: #fff;
+}
+
+.nav-links a {
+  position: relative;
+  padding-bottom: 0.2rem;
+}
+
+.nav-links a.active {
+  color: #000;
+  font-weight: 700;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.2rem;
+  height: 2px;
+  background: #000;
 }
 
 .logo {
